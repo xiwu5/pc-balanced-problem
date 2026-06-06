@@ -1,30 +1,37 @@
+from collections import defaultdict
 def balanced(numbers):
     ans = set()
-    sum_map = {}
-    final = set()
+    sum_map = defaultdict(set)
+    # {:()}
+
+    #final = set()
     # value_list = []
 
-    if_appear = set()
+    #if_appear = set()
 
     for i in range(len(numbers) - 1): #  avoid index out of boundary issue
         for j in range(i + 1, len(numbers)):
             sum = numbers[i] + numbers[j]
-            if sum in sum_map:
-                sum_map[sum].append(numbers[j])  # Key exists, append to list
-                sum_map[sum].append(numbers[i])
-            else:
-                sum_map[sum] = [numbers[j],numbers[i]] # 13, 7, 8... # store the sum as the key instead
+            # if sum in sum_map:
+            sum_map[sum].add(numbers[j])  # Key exists, append to list
+            sum_map[sum].add(numbers[i])
+            # else:
+            #     sum_map[sum] = set(numbers[j],numbers[i]) # 13, 7, 8... # store the sum as the key instead
             # handle case: when add the sum again, do not update value but add on value
             sum = 0
 
     for key, value in sum_map.items():
         # print("test", len(value))
         # print(value)
+        # print(len(value))
         if len(value) > 2:
-            ans.add(value)
+            return value
+            # ans.add(value)
             #list(set(list))
 
     #final.add(ans)
+    # 7:[4, 3, 5, 2]
+
     
     return ans
     # # iterate the map, when their value are equal, store the key
